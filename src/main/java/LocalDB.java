@@ -26,8 +26,20 @@ public class LocalDB {
                               rs.getString("email"),
                               rs.getString("passwd")));
         }
-        //System.out.println(user);
-        statement.executeQuery("DELETE FROM users WHERE email = '"wewef"'")
+
+        System.out.println(user);
+        System.out.println(user.get(4));
+        statement.execute("DELETE FROM users WHERE users.email = '"+ user.get(4).getEmail() +"'");
+        user.clear();
+
+         rs = statement.executeQuery("SELECT * FROM users;");
+        while(rs.next()){
+            //make mapping on User class
+            user.add(new User(rs.getString("id"),
+                    rs.getString("email"),
+                    rs.getString("passwd")));
+        }
+        System.out.println(user);
         connection.close();
     }
 }
