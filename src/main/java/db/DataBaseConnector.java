@@ -15,7 +15,7 @@ public class DataBaseConnector {
 
     private DataBaseConnector() {
         try {
-            connection = DriverManager.getConnection("", "", "");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/wordpress", "root", "");
         } catch (Exception ex) {
             throw new RuntimeException("Unable to connect to DB", ex);
         }
@@ -40,7 +40,7 @@ public class DataBaseConnector {
     public ResultSet executeQuery(String sql) {
         try {
             Statement statement = connection.createStatement();
-            statement.executeQuery(sql);
+            return statement.executeQuery(sql);
         }catch(Exception ex){
             throw  new RuntimeException("Unable to execute query", ex);
         }
